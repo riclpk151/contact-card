@@ -11,6 +11,12 @@ URL:https://www.melodise.co
 END:VCARD`;
 
   res.setHeader('Content-Type', 'text/vcard; charset=utf-8');
-  res.setHeader('Content-Disposition', 'inline; filename="ck.vcf"');
+
+  // REMOVE filename hint completely
+  res.setHeader('Content-Disposition', 'inline');
+
+  // Force no caching (prevents weird behaviour)
+  res.setHeader('Cache-Control', 'no-store');
+
   res.status(200).send(vcf);
 }
